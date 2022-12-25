@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
+</head>
+<body>
+    <form action="/" method="post">
+        <div class="mb-5 p-40 text-center">
+            <label
+              for="name"
+              class="mb-3 block text-base font-medium text-[#07074D]"
+            >
+              Search For a City
+            </label>
+            <input
+              type="text"
+              name="city"
+              id="name"
+              {% if data %}
+                value="{{ data['city'] }}"
+              {% endif %}
+              placeholder="Enter City "
+              class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+            />
+            <input class="mt-5 bg-blue-300 text-center rounded-md p-2" type="submit" value="Submit">
+          </div>
+    </form>
+
+
+    {% if data %}
+    <img class="items-center h-[100px] w-[100px] ml-[900px]" src="{{ data['icon'] }}" alt="">
+    <div class="p-2 mt-10 text-center text-lg font-bold">
+        <div>
+          <p>Showing Result For : {{ data["city"] }}</p>
+        <p>Country : {{ data["country"] }}</p>
+        <p>Longitude : {{ data["lon"] }}</p>
+        <p>Latitude : {{ data["lat"] }}</p>
+        <p>Local Time : {{ data["time"] }}</p>
+        <p>Temperature : {{ data["temp"] }}C</p>
+        <p>Updated at : {{ data["updated"] }}</p>
+        </div>
+    </div>
+    {% endif %}
+</body>
+</html>
